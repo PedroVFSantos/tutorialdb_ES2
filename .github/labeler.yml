@@ -1,0 +1,6 @@
+# Configure labels based on changed files
+backend:
+  - '**.py'
+frontend:
+  - 'app/templates/**'
+  - 'index.html'
