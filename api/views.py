@@ -55,7 +55,7 @@ def tutorials(request):
                         category=request.data['category']
                     )
                     for tag in tags:
-                        obj, created = Tag.objects.get_or_create(name=tag)
+                        _, created = Tag.objects.get_or_create(name=tag)
 
                     tag_obj_list = Tag.objects.filter(name__in=tags)
                     tutorial_object.tags.set(tag_obj_list)
