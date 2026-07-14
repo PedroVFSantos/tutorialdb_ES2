@@ -11,6 +11,10 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+    def published_tutorials_count(self):
+        """Returns the number of published tutorials associated with this tag"""
+        return self.tutorial_set.filter(publish=True).count()
+
 
 class Tutorial(models.Model):
     """tutorials have a title, a URL, a set of tags, a category and creation date"""

@@ -11,7 +11,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 
 try:
     LOCAL_HOST = os.environ['LOCAL_HOST'] # your local IP to test the site on your network
-except:
+except KeyError:
     LOCAL_HOST = None
 
 DEBUG = False
