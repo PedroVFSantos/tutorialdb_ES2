@@ -11,13 +11,14 @@ SECRET_KEY = os.environ['SECRET_KEY']
 
 try:
     LOCAL_HOST = os.environ['LOCAL_HOST'] # your local IP to test the site on your network
-except:
+except KeyError:
     LOCAL_HOST = None
 
 DEBUG = False
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
+    'localhost',
     'tutorialdb.pythonanywhere.com',
     'tutorialdb-app.herokuapp.com',
 ]
@@ -126,7 +127,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-PROJECT_ROOT = os.path.join(os.path.abspath(__file__))
+PROJECT_ROOT = BASE_DIR
 
 # Location of all static files
 STATIC_URL = '/static/'
