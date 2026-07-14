@@ -20,6 +20,7 @@ class Tutorial(models.Model):
     COURSE = 'course'
     DOCS = 'docs'
     VIDEO = 'video'
+    PODCAST = 'podcast'
 
     CATEGORIES = (
         (ARTICLE, 'Article'),
@@ -28,6 +29,7 @@ class Tutorial(models.Model):
         (COURSE, 'Course'),
         (DOCS, 'Documentation'),
         (VIDEO, 'Video'),
+        (PODCAST, 'Podcast'),
     )
 
     title = models.CharField(max_length=200)
@@ -39,3 +41,7 @@ class Tutorial(models.Model):
 
     def __str__(self):
         return self.title
+
+    def is_published(self):
+        """Returns True if the tutorial is published"""
+        return self.publish
