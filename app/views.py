@@ -4,6 +4,7 @@ from django.core.cache import cache
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
 from django.shortcuts import render
+from django.views.decorators.http import require_GET
 from django.views.generic import TemplateView
 from taggie.parser import generate_tags
 from .models import Tag, Tutorial
@@ -21,6 +22,7 @@ class HomePageView(TemplateView):
         return self.context
 
 
+@require_GET
 def search_query(request):
     """view for the search results"""
     query = request.GET.get('q').lower()
@@ -64,6 +66,7 @@ def search_query(request):
     return render(request, 'search_results.html', context)
 
 
+@require_GET
 def latest(request):
     """view for the latest tutorial entries"""
     tutorials = Tutorial.objects.all().filter(publish=True).order_by('-id')[:10]
@@ -74,6 +77,7 @@ def latest(request):
     return render(request, 'latest.html', context)
 
 
+@require_GET
 def tags(request):
     """view for the tags"""
     tags = cache.get_or_set(cache_constants.ALL_TAGS, Tag.objects.all(), None)
@@ -84,6 +88,7 @@ def tags(request):
     return render(request, 'tags.html', context)
 
 
+@require_GET
 def taglinks(request, tagname):
     """view for the tutorials with the {tagname}"""
     taglist = []
@@ -97,6 +102,7 @@ def taglinks(request, tagname):
     return render(request, 'taglinks.html', context)
 
 
+@require_GET
 def about(request):
     """about view"""
     return render(request, 'about.html', {'title': 'About'})
