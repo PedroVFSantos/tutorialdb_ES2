@@ -18,6 +18,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
+    'localhost',
     'tutorialdb.pythonanywhere.com',
     'tutorialdb-app.herokuapp.com',
 ]
