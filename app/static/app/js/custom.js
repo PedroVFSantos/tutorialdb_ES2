@@ -17,9 +17,7 @@ function share(title, link) {
 }
 
 function checkEmpty() {
-	var input = document.getElementById("search-bar");
-	if (input.value === "" || input.value === null) {
-		return false;
-	}
-	return true;
+    var input = document.getElementById("search-bar");
+    
+    return input.value !== "" && input.value !== null;
 }
