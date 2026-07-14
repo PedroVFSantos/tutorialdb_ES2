@@ -3,10 +3,12 @@ from app.models import Tag, Tutorial
 
 class TagModelTest(TestCase):
     def test_string_representation(self):
+        """Valida que a representação em string da Tag é o seu próprio nome."""
         tag = Tag(name="Python")
         self.assertEqual(str(tag), tag.name)
 
     def test_published_tutorials_count(self):
+        """Valida a contagem exclusiva de tutoriais publicados vinculados a uma tag (M2)."""
         tag = Tag.objects.create(name="Django")
         
         t1 = Tutorial.objects.create(
@@ -38,12 +40,15 @@ class TutorialModelTest(TestCase):
         self.tutorial.save()
 
     def test_string_representation(self):
+        """Valida que a representação em string do Tutorial é o seu próprio título."""
         self.assertEqual(str(self.tutorial), self.tutorial.title)
 
     def test_is_published(self):
+        """Valida que is_published retorna True para tutoriais publicados (M1)."""
         self.assertTrue(self.tutorial.is_published())
 
     def test_not_published(self):
+        """Valida que is_published retorna False para tutoriais rascunho (M1)."""
         draft = Tutorial(
             title="Draft",
             link="http://example.com",

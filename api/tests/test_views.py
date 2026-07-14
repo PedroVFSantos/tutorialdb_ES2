@@ -16,6 +16,7 @@ class APITests(TransactionTestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_tutorial_tag_api(self):
+        """Valida o endpoint da API REST para filtragem de tutoriais por tag específica."""
         from app.models import Tag, Tutorial
         tag = Tag.objects.create(name="python")
         t = Tutorial.objects.create(
@@ -29,6 +30,7 @@ class APITests(TransactionTestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_tutorial_tag_category_api(self):
+        """Valida o endpoint da API REST para filtragem combinada de tag e categoria."""
         from app.models import Tag, Tutorial
         tag = Tag.objects.create(name="django")
         t = Tutorial.objects.create(

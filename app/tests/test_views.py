@@ -31,6 +31,7 @@ class DynamicPageTests(TransactionTestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_search_query_view(self):
+        """Valida o funcionamento da view de busca de tutoriais com e sem filtro de categoria."""
         from app.models import Tag, Tutorial
         tag = Tag.objects.create(name="django")
         t = Tutorial.objects.create(
@@ -48,6 +49,7 @@ class DynamicPageTests(TransactionTestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_taglinks_view(self):
+        """Valida o funcionamento da view de listagem de tutoriais filtrados por tag."""
         from app.models import Tag, Tutorial
         tag = Tag.objects.create(name="python")
         t = Tutorial.objects.create(
