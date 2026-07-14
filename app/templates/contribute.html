@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<section class="hero is-medium is-primary is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title" style="text-align: center">
+        Found a bug 🐛 ❓<br>
+        Have a feature ✨ request ❓<br> 
+        create an 
+        <a class="button is-link" href="https://github.com/Bhupesh-V/tutorialdb/issues/new">issue</a>
+      </h1>
+    </div>
+  </div>
+</section>
+<section class="hero is-medium is-dark is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title" style="text-align: center">Or just,<br>
+        <img src="{% static 'app/help.svg' %}" height="100" width="100" alt="help">
+        <br>Help others by submitting tutorials you follow.<br>
+        🤗
+      </h1>
+    </div>
+  </div>
+</section>
+<section class="hero is-medium is-primary is-bold">
+  <div class="hero-body">
+    {% if error %}
+    <span class="tag is-danger is-large"><b>{{ error }}</b></span>
+    {% endif %}
+    <div class="container">
+      <br><br>
+      <form action="{% url 'app:contribute' %}" method="post">
+      {% csrf_token %}
+        <div class="field">
+          <label class="label">Link</label>
+          <div class="control">
+            <input class="input is-rounded" type="url" name="tlink" placeholder="paste tutorial link here..." autofocus required>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Type</label>
+          <div class="control">
+            <div class="select is-rounded">
+              <select name="tcategory">
+                <option disabled selected value="">Select Category</option>
+                {% for category_value, category_name in categories %}
+                <option value="{{ category_value }}">{{ category_name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="field is-grouped">
+          <div class="control">
+            <button class="button is-link is-rounded" type="submit">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock content %}
