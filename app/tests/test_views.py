@@ -30,6 +30,37 @@ class DynamicPageTests(TransactionTestCase):
         response = self.client.get('/tags/')
         self.assertEqual(response.status_code, 200)
 
+    def test_search_query_view(self):
+        from app.models import Tag, Tutorial
+        tag = Tag.objects.create(name="django")
+        t = Tutorial.objects.create(
+            title="Django Advanced",
+            link="https://djangoproject.com/adv",
+            category=Tutorial.DOCS,
+            publish=True
+        )
+        t.tags.add(tag)
+
+        response = self.client.get('/search/?q=django')
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.get('/search/?q=django&category=docs')
+        self.assertEqual(response.status_code, 200)
+
+    def test_taglinks_view(self):
+        from app.models import Tag, Tutorial
+        tag = Tag.objects.create(name="python")
+        t = Tutorial.objects.create(
+            title="Python Advanced",
+            link="https://python.org/adv",
+            category=Tutorial.DOCS,
+            publish=True
+        )
+        t.tags.add(tag)
+
+        response = self.client.get('/tags/tag=python')
+        self.assertEqual(response.status_code, 200)
+
 
 class TestTemplateNames(TransactionTestCase):
 
